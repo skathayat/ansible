@@ -6,3 +6,36 @@ These examples require /etc/ansible/hosts set up with the following sections
 <ip list of vm's with centos
 [bjarneskvms]
 <ip list of all vm's>
+
+
+Note! If you are not using ansible, do the following steps (in correct order)
+-----------------------------------------------------------------------------
+
+1. Ignore root_ssh.yml file in this directory
+
+2. ntnu_ldap/ldap_ssh.yml file describes the following: 
+  - the packages to install, i.e. libnss-ldapd (and its implicit dependencies). In ubuntu, this can be done using commands like 
+      sudo apt update
+      sudo apt install libnss-ldapd 
+  - copying the following files from this repository to the VM instance with proper access rights as following
+      files/nscd.conf to /ect/nscd.conf with chmod 0600
+      files/nslcd.conf to /ect/nslcd.conf with chmod 0400
+      files/nsswitch.conf to /ect/nsswitch.conf with chmod 0400
+
+3. Take backup of your /etc/ssh/sshd_config file
+
+4. Change your /etc/ssh/sshd_config file as following
+      PasswordAuthentication yes
+      AllowUsers root ubuntu <add your users username here seperated by space>
+      AllowGroups root ubunto <your groups, for example stackit groups or other groups>
+      
+5. Thats it. Wait, dont logout from your session!
+
+6. You need to restart services now. In ubuntu, following commands can be used
+       sudo systemctl restart nslcd
+       sudo systemctl restart nscd
+       sudo systemctl restart sshd
+       
+7. Its time to test now. But, do not logout from the current terminal session. Open another terminal and test if you SSH to the VM instance using ntnu username and passwords!!
+
+
