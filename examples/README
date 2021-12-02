@@ -24,10 +24,10 @@ Note! If you are not using ansible, do the following steps (in correct order)
 
 3. Take backup of your /etc/ssh/sshd_config file
 
-4. Change your /etc/ssh/sshd_config file as following
+4. Change your /etc/ssh/sshd_config file as following (in ubuntu)
       PasswordAuthentication yes
       AllowUsers root ubuntu <add your users username here seperated by space>
-      AllowGroups root ubunto <your groups, for example stackit groups or other groups>
+      AllowGroups root ubuntu <your groups, for example stackit groups or other groups>
       
 5. Thats it. Wait, dont logout from your session!
 
